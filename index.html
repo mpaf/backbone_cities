@@ -7,10 +7,10 @@
     <button id="add-city">Add City</button>
     <ul id="city-list"></ul>
   </div>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-  <script src="http://underscorejs.org/underscore-min.js"></script>
-  <script src="http://backbonejs.org/backbone-min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.0/backbone.localStorage-min.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+  <script src="https://underscorejs.org/underscore-min.js"></script>
+  <script src="https://backbonejs.org/backbone-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.0/backbone.localStorage-min.js" type="text/javascript"></script>
   <script type="text/javascript">
 
   var City=Backbone.Model.extend({
@@ -44,6 +44,7 @@
       cities.add(city_model);
       city_model.save();
     },
+    allCities: function(model)
     addCityLi: function(model) {
       $("#city-list").append("<li>" + model.get('name') + "</li>");
     },
