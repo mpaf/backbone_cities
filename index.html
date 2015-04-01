@@ -1,0 +1,56 @@
+<html>
+<head>
+  <title>The weather page</title>
+</head>
+<body>
+  <div id="app">
+    <button id="add-city">Add City</button>
+    <ul id="city-list"></ul>
+  </div>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+  <script src="http://underscorejs.org/underscore-min.js"></script>
+  <script src="http://backbonejs.org/backbone-min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.0/backbone.localStorage-min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+
+  var City=Backbone.Model.extend({
+    name: null,
+    continent: null,
+    timezone: null,
+  });
+
+  var Cities = Backbone.Collection.extend({
+
+    model: City,
+    localStorage: new Store("backbone-cities"),
+
+  });
+
+  var cities = new Cities();
+  cities.fetch();
+
+  var AppView=Backbone.View.extend({
+    el: '#app',
+    initialize: function() {
+      cities.on("add", this.addCityLi, this);
+      cities.fetch();
+    },
+    events: {
+      "click #add-city": "addCity",
+    },
+    addCity: function() {
+      var city_name = prompt("What's the city name you're looking after?");
+      var city_model = new City({name: city_name, continent: "Europe"});
+      cities.add(city_model);
+      city_model.save();
+    },
+    addCityLi: function(model) {
+      $("#city-list").append("<li>" + model.get('name') + "</li>");
+    },
+  })
+
+  var appview = new AppView;
+
+</script>
+</body>
+</html>
